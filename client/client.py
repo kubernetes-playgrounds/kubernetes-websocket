@@ -3,10 +3,10 @@
 
 import asyncio
 import websockets
-
+import time
 
 async def hello():
-    uri = "ws://localhost:8765"
+    uri = "ws://0.0.0.0:8890"
     async with websockets.connect(uri) as websocket:
 
         await websocket.send('jude')
@@ -15,4 +15,8 @@ async def hello():
         greeting = await websocket.recv()
         print(f"< {greeting}")
 
-asyncio.get_event_loop().run_until_complete(hello())
+
+
+while True:
+    asyncio.get_event_loop().run_until_complete(hello())
+    time.sleep(2)
