@@ -4,17 +4,23 @@
 import asyncio
 import websockets
 import time
+import os
+
+deployment = os.getenv('DEPLOYMENT')
+uri = "ws://0.0.0.0:8890"
+if deployment == "DEVELOPMENT":
+    uri = "ws://websocket-server-svc:8890"
+print(f"uri: {uri}")
+
 
 async def hello():
-    uri = "ws://0.0.0.0:8890"
+
     async with websockets.connect(uri) as websocket:
 
         await websocket.send('jude')
-        # print(f"> jude")
 
         greeting = await websocket.recv()
         print(f"< {greeting}")
-
 
 
 while True:

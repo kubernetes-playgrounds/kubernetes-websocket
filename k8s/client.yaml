@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: websocket-client
+  template:
+    metadata:
+      labels:
+        app: websocket-client
+    spec:
+      containers:
+        - name: client
+          imagePullPolicy: Always
+          image: guanw0826/kubernetes-websocket-client:latest
+          env:
+            - name: DEPLOYMENT
+              value: DEVELOPMENT
+            - name: PYTHONUNBUFFERED
+              value: "0"
